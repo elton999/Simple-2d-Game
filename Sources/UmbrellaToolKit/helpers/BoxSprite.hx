@@ -1,8 +1,9 @@
 package umbrellatoolkit.helpers;
 
-import umbrellatoolkit.helpers.Position;
+import kha.math.Vector2;
+
 @:expose
 class BoxSprite{
-	public var Position:Position;
-	public var Size:Position;
+	public var Position:Vector2;
+	public var Size:Vector2;
 }

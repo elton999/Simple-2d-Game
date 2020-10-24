@@ -1,7 +1,7 @@
 package umbrellatoolkit;
 
-import umbrellatoolkit.helpers.Position;
 import umbrellatoolkit.helpers.BoxSprite;
+import kha.math.Vector2;
 import kha.Image;
 import kha.Assets;
 import kha.Framebuffer;
@@ -14,10 +14,10 @@ class GameObject {
 
 	public var Sprite:Image;
 	public var Scale:Float = 1.0;
-	public var Position:Position = new Position(0,0);
+	public var Position:Vector2 = new Vector2(0,0);
 	public var BoxSprite:BoxSprite;
 
-	public function Update(DeltaTime:Float) : Void{}
+	public function update(DeltaTime:Float) : Void{}
 	public function render(g2:kha.graphics2.Graphics): Void{
 		
 	}

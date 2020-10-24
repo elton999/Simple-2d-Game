@@ -1,4 +1,5 @@
 package;
+import js.html.Blob;
 import kha.WindowMode;
 import kha.Window;
 import umbrellatoolkit.Scene;
@@ -21,7 +22,7 @@ class GameManagment {
 
 	public function update(): Void {
 		this.DeltaTime.update();
-		this.CurrentScene.Update(this.DeltaTime.delta);
+		this.CurrentScene.update(this.DeltaTime.delta);
 	}
 
 	public function render(framebuffer: Framebuffer): Void {

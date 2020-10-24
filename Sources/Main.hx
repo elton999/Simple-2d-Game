@@ -21,13 +21,8 @@ class Main {
 		var WindowSettins = new WindowOptions();
 		WindowSettins.mode = Fullscreen;
 		System.start({title: "Simple 2d", width: 1920, height: 1080, window: WindowSettins}, function (_) {
-			// Just loading everything is ok for small projects
-			Assets.loadEverything(function () {
-				// Avoid passing update/render directly,
-				// so replacing them via code injection works
-				Scheduler.addTimeTask(function () { Game.update(); }, 0, 1 / 60);
-				System.notifyOnFrames(function (frames) { Game.render(frames[0]); });
-			});
+			Scheduler.addTimeTask(function () { Game.update(); }, 0, 1 / 60);
+			System.notifyOnFrames(function (frames) { Game.render(frames[0]); });
 		});
 	}
 }
