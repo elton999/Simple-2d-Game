@@ -18,6 +18,17 @@
   "entityTags": [],
   "layers": [
     {
+      "definition": "decal",
+      "name": "new_layer",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "55868436",
+      "folder": "",
+      "includeImageSequence": true,
+      "scaleable": false,
+      "rotatable": false,
+      "values": []
+    },
+    {
       "definition": "tile",
       "name": "middleground",
       "gridSize": {"x": 8, "y": 8},
