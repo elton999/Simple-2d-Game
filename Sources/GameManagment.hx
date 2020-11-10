@@ -1,32 +1,35 @@
 package;
-import js.html.Blob;
-import kha.WindowMode;
-import kha.Window;
 import umbrellatoolkit.Scene;
 import umbrellatoolkit.helpers.Timer;
-import umbrellatoolkit.helpers.Point;
-import kha.Assets;
 import kha.Framebuffer;
-import kha.Scheduler;
-import kha.System;
 
 class GameManagment {
-	public var CurrentScene: Scene;
+	public var Scene: Scene;
 	public var FullScreem:Bool = true;
 	private var DeltaTime:Timer;
 
 	public function new (){
-		this.CurrentScene = new Scene();
+		this.Scene = new Scene();
 		this.DeltaTime = new Timer();
 	}
 
+	private var LoadScene:Bool = false;
 	public function update(): Void {
-		this.DeltaTime.update();
-		this.CurrentScene.update(this.DeltaTime.delta);
+		if(!this.LoadScene){
+			this.Scene.scene = new Scene();
+			this.Scene.scene.LoadLevel("Content_Game2d_ogmo", "Content_level1_json");
+			this.LoadScene = true;
+		}
+
+		if(this.Scene.scene != null){
+			this.DeltaTime.update();
+			this.Scene.scene.update(this.DeltaTime.delta);
+		}
 	}
 
 	public function render(framebuffer: Framebuffer): Void {
-		this.CurrentScene.render(framebuffer);
-		
+		if(this.Scene.scene != null){
+			this.Scene.scene.render(framebuffer);
+		}
 	}
 }

@@ -18,6 +18,7 @@ class Main {
 
 	static var Game:GameManagment = new GameManagment();
 	public static function main() {
+		
 		var WindowSettins = new WindowOptions();
 		WindowSettins.mode = Fullscreen;
 		System.start({title: "Simple 2d", width: 1920, height: 1080, window: WindowSettins}, function (_) {

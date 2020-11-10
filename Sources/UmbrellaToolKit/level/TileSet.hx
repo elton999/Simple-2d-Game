@@ -1,4 +1,5 @@
 package umbrellatoolkit.level;
+import kha.Color;
 import haxe.Json;
 import kha.math.Vector2;
 
@@ -22,6 +23,7 @@ typedef Ogmo = {
 }
 
 typedef Layers = {
+	var exportID:String;
 	var definition:String;
 	var name:String;
 	var gridSize:Vector2;
