@@ -27,7 +27,7 @@
       "gridCellsX": 64,
       "gridCellsY": 42,
       "entities": [
-        {"name": "player", "id": 0, "_eid": "54785938", "x": 0, "y": 88, "originX": 0, "originY": 0}
+        {"name": "Player", "id": 0, "_eid": "54785938", "x": 0, "y": 88, "originX": 0, "originY": 0}
       ]
     },
     {
@@ -88,7 +88,7 @@
       "arrayMode": 1
     },
     {
-      "name": "grid",
+      "name": "background",
       "_eid": "54791936",
       "offsetX": 0,
       "offsetY": 0,

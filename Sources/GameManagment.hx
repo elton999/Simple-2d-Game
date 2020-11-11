@@ -7,7 +7,7 @@ import kha.Framebuffer;
 
 class GameManagment {
 	public var Scene: Scene;
-	private var AssetsManagment:AssetsManagment = new AssetsManagment;
+	private var AssetsManagment:AssetsManagment = new AssetsManagment();
 
 	public var FullScreem:Bool = true;
 	private var DeltaTime:Timer;
@@ -17,14 +17,14 @@ class GameManagment {
 		this.DeltaTime = new Timer();
 
 		// Set Assets
-		AssetsManagment.add(Player, "Player", LayersScene.PLAYER);
+		this.AssetsManagment.add(Player, "Player", LayersScene.PLAYER);
 	}
 
 	private var LoadScene:Bool = false;
 	public function update(): Void {
 		if(!this.LoadScene){
 			this.Scene.scene = new Scene();
-			this.Scene.scene.LoadLevel("Content_Game2d_ogmo", "Content_level1_json");
+			this.Scene.scene.LoadLevel("Content_Game2d_ogmo", "Content_level1_json", this.AssetsManagment);
 			this.LoadScene = true;
 		}
 

@@ -4,6 +4,7 @@ import umbrellatoolkit.GameObject;
 import umbrellatoolkit.helpers.Point;
 import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.TileMap;
+import umbrellatoolkit.level.AssetsManagment;
 import kha.Scaler;
 import kha.Image;
 import kha.Assets;
@@ -54,13 +55,13 @@ class Scene {
 	private var TileSetString:String;
 	private var TileMapString:String;
 	
-	public function LoadLevel(tileSet:String, level:String){
+	public function LoadLevel(tileSet:String, level:String, assets:AssetsManagment){
 		this.TileSetString = tileSet;
 		this.TileMapString = level;
 		Assets.loadBlob(tileSet, function (done:kha.Blob.Blob){
 			this.TileSet = new TileSet(done.toString());
 			Assets.loadBlob(level, function(done:kha.Blob.Blob){
-				this.TileMap = new TileMap(done.toString(), this.TileSet, this);
+				this.TileMap = new TileMap(done.toString(), this.TileSet, this, assets);
 				this.TileMap.CreateLevel();
 
 				this.SceneReady = true;

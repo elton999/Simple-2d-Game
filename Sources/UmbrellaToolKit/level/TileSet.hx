@@ -34,6 +34,7 @@ typedef Layers = {
 }
 
 typedef Entity = {
+	var exportID:String;
 	var name:String;
 	var size:Vector2;
 	var origin:Vector2;

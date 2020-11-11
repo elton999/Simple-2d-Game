@@ -1,11 +1,10 @@
 package umbrellatoolkit.level;
 
-import Type.ValueType;
 import kha.math.Vector2;
 import umbrellatoolkit.GameObject;
-import umbrellatoolkit.level.TileMap.LevelLayer;
 import umbrellatoolkit.Scene;
 
+@:expose
 class AssetsManagment
 {
 	private var _GameObjectsList:Map<String, AssetObject> = new Map<String, AssetObject>();
@@ -24,7 +23,7 @@ class AssetsManagment
 		var asset:AssetObject = this._GameObjectsList[tag];
 		var gameObject:GameObject = Type.createInstance(asset.gameObject, []);
 		gameObject.Position = position;
-		
+
 		switch (asset.layer){
 			case PLAYER:
 				scene.Player.push(gameObject);

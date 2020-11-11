@@ -57,7 +57,7 @@
   "entities": [
     {
       "exportID": "54785938",
-      "name": "player",
+      "name": "Player",
       "limit": -1,
       "size": {"x": 32, "y": 32},
       "origin": {"x": 0, "y": 0},

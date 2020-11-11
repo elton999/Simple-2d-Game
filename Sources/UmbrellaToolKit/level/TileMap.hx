@@ -7,17 +7,20 @@ import umbrellatoolkit.GameObject;
 import umbrellatoolkit.level.Tile;
 import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.Layer;
+import umbrellatoolkit.level.AssetsManagment;
 
 @:expose
 class TileMap{
 	public var Data:Level;
 	private var _TileSet:TileSet;
 	private var _Scene:Scene;
+	private var _Assets:AssetsManagment;
 
-	public function new(dataString:String, tileSet:TileSet, scene:Scene){
+	public function new(dataString:String, tileSet:TileSet, scene:Scene, assets:AssetsManagment){
 		this.Data = Json.parse(dataString);
 		this._TileSet = tileSet;
 		this._Scene = scene;
+		this._Assets = assets;
 	}
 
 	public function CreateLevel(){
@@ -53,7 +56,14 @@ class TileMap{
 
 				// setting tiles colors on Scene
 				this._Scene.Background.push(layers);
+			}//End Grid
+			// entities
+			else if(layer.entities != null){
+				for(entity in layer.entities){
+					this._Assets.addEntityOnSene(entity.name, this._Scene, new Vector2(entity.x, entity.y));
+				}
 			}
+
 			i++;
 		}
 
@@ -80,4 +90,14 @@ typedef LevelLayer = {
 	var gridCellsY:Int;
 	var data2D:Array<Array<Int>>;
 	var grid2D:Array<Array<String>>;
+	var entities:Array<LevelLayerEntities>;
+}
+
+typedef LevelLayerEntities = {
+	var name:String;
+	var _eid:String;
+	var x:Int;
+	var y:Int;
+	var originX:Int;
+	var originY:Int;
 }
