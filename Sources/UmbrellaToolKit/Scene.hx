@@ -23,7 +23,7 @@ class Scene {
 	public var MiddleGround:Array<GameObject> = new Array();
 	public var Background:Array<GameObject> = new Array();
 	
-	public var BackgroundColor:Color = Color.Blue
+	public var BackgroundColor:Color = Color.Blue;
 	public var ScreemSize:Point = new Point(426, 240);
 
 	public var _BackBuffer:Image;

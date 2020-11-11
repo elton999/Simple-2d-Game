@@ -38,7 +38,7 @@ class TileMap{
 								// if isn't transparent create a tile color
 								if(row != "0"){
 									var tile:Tile = new Tile();
-									tile.squareColor = Color.fromString(layerD.legend[Std.parseInt(row)]);
+									tile.squareColor = Color.fromString(layerD.legend[Std.parseInt(row)].substring(0,7));
 									tile.squareSize = new Vector2(layer.gridCellWidth, layer.gridCellHeight);
 									tile.Position = new Vector2(layer.gridCellWidth*x, layer.gridCellHeight*y);
 
@@ -57,7 +57,7 @@ class TileMap{
 			i++;
 		}
 
-		this._Scene.BackgroundColor = Color.fromString(this._TileSet.Data.backgroundColor);
+		this._Scene.BackgroundColor = Color.fromString(this._TileSet.Data.backgroundColor.substring(0,7));
 	}
 }
 
