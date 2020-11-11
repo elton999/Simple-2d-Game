@@ -1,16 +1,23 @@
 package;
+import entities.Player;
 import umbrellatoolkit.Scene;
+import umbrellatoolkit.level.AssetsManagment;
 import umbrellatoolkit.helpers.Timer;
 import kha.Framebuffer;
 
 class GameManagment {
 	public var Scene: Scene;
+	private var AssetsManagment:AssetsManagment = new AssetsManagment;
+
 	public var FullScreem:Bool = true;
 	private var DeltaTime:Timer;
 
 	public function new (){
 		this.Scene = new Scene();
 		this.DeltaTime = new Timer();
+
+		// Set Assets
+		AssetsManagment.add(Player, "Player", LayersScene.PLAYER);
 	}
 
 	private var LoadScene:Bool = false;

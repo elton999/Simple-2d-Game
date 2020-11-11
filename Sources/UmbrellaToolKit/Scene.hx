@@ -13,6 +13,15 @@ import kha.System;
 import kha.Blob;
 import kha.Color;
 
+enum LayersScene {
+	UI;
+	FORENGROUND;
+	PLAYER;
+	ENEMIES;
+	MIDDLEGROUND;
+	BACKGROUND;
+}
+
 @:expose
 class Scene {
 

@@ -15,7 +15,7 @@
   "compactExport": false,
   "externalScript": "",
   "playCommand": "",
-  "entityTags": [],
+  "entityTags": ["player"],
   "layers": [
     {
       "definition": "decal",
@@ -29,6 +29,14 @@
       "values": []
     },
     {
+      "definition": "entity",
+      "name": "Player",
+      "gridSize": {"x": 8, "y": 8},
+      "exportID": "06821621",
+      "requiredTags": [],
+      "excludedTags": []
+    },
+    {
       "definition": "tile",
       "name": "middleground",
       "gridSize": {"x": 8, "y": 8},
@@ -39,7 +47,7 @@
     },
     {
       "definition": "grid",
-      "name": "grid",
+      "name": "background",
       "gridSize": {"x": 8, "y": 8},
       "exportID": "54791936",
       "arrayMode": 1,
@@ -51,7 +59,7 @@
       "exportID": "54785938",
       "name": "player",
       "limit": -1,
-      "size": {"x": 16, "y": 16},
+      "size": {"x": 32, "y": 32},
       "origin": {"x": 0, "y": 0},
       "originAnchored": true,
       "shape": {
@@ -68,7 +76,7 @@
       "color": "#ff0000ff",
       "tileX": false,
       "tileY": false,
-      "tileSize": {"x": 16, "y": 16},
+      "tileSize": {"x": 32, "y": 32},
       "resizeableX": false,
       "resizeableY": false,
       "rotatable": false,
@@ -80,7 +88,7 @@
       "nodeLimit": 0,
       "nodeDisplay": 0,
       "nodeGhost": true,
-      "tags": [],
+      "tags": ["player"],
       "values": []
     }
   ],
