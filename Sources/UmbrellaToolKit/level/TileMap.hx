@@ -7,6 +7,7 @@ import umbrellatoolkit.GameObject;
 import umbrellatoolkit.level.Tile;
 import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.Layer;
+import umbrellatoolkit.level.Collision;
 import umbrellatoolkit.level.AssetsManagment;
 
 @:expose
@@ -29,7 +30,7 @@ class TileMap{
 			var layer = this.Data.layers[i];
 			var layers:Layer = new Layer();
 
-			// grid
+			// Grid
 			if(layer.grid2D != null){
 				for(layerD in this._TileSet.Data.layers){
 					if(layer._eid == layerD.exportID){
@@ -40,10 +41,13 @@ class TileMap{
 							for(row in line){
 								// if isn't transparent create a tile color
 								if(row != "0"){
+
 									var tile:Tile = new Tile();
 									tile.squareColor = Color.fromString(layerD.legend[Std.parseInt(row)].substring(0,7));
 									tile.squareSize = new Vector2(layer.gridCellWidth, layer.gridCellHeight);
 									tile.Position = new Vector2(layer.gridCellWidth*x, layer.gridCellHeight*y);
+
+									this.addCollisionLayer(row, tile.squareSize, tile.Position);
 
 									layers.addGameObject(tile);
 								}
@@ -57,17 +61,37 @@ class TileMap{
 				// setting tiles colors on Scene
 				this._Scene.Background.push(layers);
 			}//End Grid
+			
 			// entities
 			else if(layer.entities != null){
 				for(entity in layer.entities){
 					this._Assets.addEntityOnSene(entity.name, this._Scene, new Vector2(entity.x, entity.y));
 				}
-			}
+			}// End entities
 
 			i++;
 		}
 
 		this._Scene.BackgroundColor = Color.fromString(this._TileSet.Data.backgroundColor.substring(0,7));
+	}
+
+	public function addCollisionLayer(tag:String, size:Vector2, position:Vector2){
+		var _find:Bool = false;
+		var i = 0;
+		while(i < this._Scene.CollisionLayer.length){
+			if(this._Scene.CollisionLayer[i].tag == tag){
+				_find = true;
+				this._Scene.CollisionLayer[i].add(size, position);
+			}
+			i++;
+		}
+
+		if(!_find){
+			var _collision:Collision = new Collision();
+			_collision.tag = tag;
+			_collision.add(size, position);
+			this._Scene.CollisionLayer.push(_collision);
+		}
 	}
 }
 

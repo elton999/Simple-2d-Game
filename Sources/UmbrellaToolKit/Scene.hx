@@ -4,6 +4,7 @@ import umbrellatoolkit.GameObject;
 import umbrellatoolkit.helpers.Point;
 import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.TileMap;
+import umbrellatoolkit.level.Collision;
 import umbrellatoolkit.level.AssetsManagment;
 import kha.Scaler;
 import kha.Image;
@@ -39,6 +40,7 @@ class Scene {
 	public var _BackBuffer:Image;
 
 	public var SceneReady:Bool = false;
+	public var CollisionLayer:Array<Collision> = new Array<Collision>();
 
 	public var scene:umbrellatoolkit.Scene;
 
@@ -60,10 +62,11 @@ class Scene {
 		this.TileMapString = level;
 		Assets.loadBlob(tileSet, function (done:kha.Blob.Blob){
 			this.TileSet = new TileSet(done.toString());
+			done.unload();
 			Assets.loadBlob(level, function(done:kha.Blob.Blob){
 				this.TileMap = new TileMap(done.toString(), this.TileSet, this, assets);
 				this.TileMap.CreateLevel();
-
+				done.unload();
 				this.SceneReady = true;
 			});
 		});
@@ -86,6 +89,16 @@ class Scene {
 		}
 	}
 
+	public function updateData(deltaTime:Float) : Void{
+		if(this.SceneReady){
+			for(gameObject in this.Background) gameObject.updateData(deltaTime);
+			for(gameObject in this.MiddleGround) gameObject.updateData(deltaTime);
+			for(gameObject in this.Enemies) gameObject.updateData(deltaTime);
+			for(gameObject in this.Player) gameObject.updateData(deltaTime);
+			for(gameObject in this.Forenground) gameObject.updateData(deltaTime);
+			for(gameObject in this.UI) gameObject.updateData(deltaTime);
+		}
+	}
 
 	public function render(framebuffer: Framebuffer): Void{
 

@@ -34,6 +34,13 @@ class GameManagment {
 		}
 	}
 
+	public function updateData():Void{
+		if(this.Scene.scene != null){
+			this.DeltaTime.update();
+			this.Scene.scene.updateData(this.DeltaTime.delta);
+		}
+	}
+
 	public function render(framebuffer: Framebuffer): Void {
 		if(this.Scene.scene != null){
 			this.Scene.scene.render(framebuffer);

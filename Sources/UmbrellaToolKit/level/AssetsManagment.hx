@@ -20,15 +20,18 @@ class AssetsManagment
 	}
 
 	public function addEntityOnSene(tag:String, scene:Scene, position:Vector2):Void{
-		var asset:AssetObject = this._GameObjectsList[tag];
-		var gameObject:GameObject = Type.createInstance(asset.gameObject, []);
-		gameObject.Position = position;
+		if(this._GameObjectsList.exists(tag)){
+			var asset:AssetObject = this._GameObjectsList[tag];
+			var gameObject:GameObject = Type.createInstance(asset.gameObject, []);
+			gameObject.Position = position;
 
-		switch (asset.layer){
-			case PLAYER:
-				scene.Player.push(gameObject);
-			default:
-				trace("not found");
+			switch (asset.layer){
+				case PLAYER:
+					scene.Player.push(gameObject);
+					gameObject.scene = scene;
+				default:
+					trace("not found");
+			}
 		}
 	}
 }
