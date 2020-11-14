@@ -43,7 +43,7 @@ class TileMap{
 								if(row != "0"){
 
 									var tile:Tile = new Tile();
-									tile.squareColor = Color.fromString(layerD.legend[Std.parseInt(row)].substring(0,7));
+									tile.squareColor = Color.Yellow ;//Color.fromString(layerD.legend[Std.parseInt(row)].substring(0,7));
 									tile.squareSize = new Vector2(layer.gridCellWidth, layer.gridCellHeight);
 									tile.Position = new Vector2(layer.gridCellWidth*x, layer.gridCellHeight*y);
 

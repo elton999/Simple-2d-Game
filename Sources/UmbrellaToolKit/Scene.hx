@@ -1,6 +1,7 @@
 package umbrellatoolkit;
 
 import umbrellatoolkit.GameObject;
+import umbrellatoolkit.Camera;
 import umbrellatoolkit.helpers.Point;
 import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.TileMap;
@@ -36,6 +37,7 @@ class Scene {
 	
 	public var BackgroundColor:Color = Color.Blue;
 	public var ScreemSize:Point = new Point(426, 240);
+	public var cameraLerpSpeed:Float = 0.06;
 
 	public var _BackBuffer:Image;
 
@@ -43,12 +45,14 @@ class Scene {
 	public var CollisionLayer:Array<Collision> = new Array<Collision>();
 
 	public var scene:umbrellatoolkit.Scene;
+	public var camera:Camera;
 
 	public function new (){}
 
 	public function CreateScene(){
-		if(this.scene != null)
+		if(this.scene != null){
 			this.scene = new umbrellatoolkit.Scene();
+		}
 	}
 
 
@@ -68,6 +72,10 @@ class Scene {
 				this.TileMap.CreateLevel();
 				done.unload();
 				this.SceneReady = true;
+				this.camera = new Camera();
+				this.camera.scene = this;
+				if(this.Player.length > 0) this.camera.follow = this.Player[0];
+				
 			});
 		});
 	}
@@ -80,6 +88,7 @@ class Scene {
 
 	public function update(deltaTime:Float) : Void{
 		if(this.SceneReady){
+			if(this.camera != null) this.camera.update();
 			for(gameObject in this.Background) gameObject.update(deltaTime);
 			for(gameObject in this.MiddleGround) gameObject.update(deltaTime);
 			for(gameObject in this.Enemies) gameObject.update(deltaTime);
@@ -106,12 +115,14 @@ class Scene {
 		var graphics = this._BackBuffer.g2;
 		graphics.begin(this.BackgroundColor);
 			if(this.SceneReady){
+				if(this.camera != null) this.camera.begin(graphics);
 				for(gameObject in this.Background) gameObject.render(graphics);
 				for(gameObject in this.MiddleGround) gameObject.render(graphics);
 				for(gameObject in this.Enemies) gameObject.render(graphics);
 				for(gameObject in this.Player) gameObject.render(graphics);
 				for(gameObject in this.Forenground) gameObject.render(graphics);
 				for(gameObject in this.UI) gameObject.render(graphics);
+				if(this.camera != null) this.camera.end(graphics);
 			} else{
 				graphics.fillRect(0,0 ,8,8);
 			}

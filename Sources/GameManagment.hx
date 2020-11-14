@@ -24,6 +24,7 @@ class GameManagment {
 	public function update(): Void {
 		if(!this.LoadScene){
 			this.Scene.scene = new Scene();
+			this.Scene.scene.cameraLerpSpeed = 1;
 			this.Scene.scene.LoadLevel("Content_Game2d_ogmo", "Content_level1_json", this.AssetsManagment);
 			this.LoadScene = true;
 		}
