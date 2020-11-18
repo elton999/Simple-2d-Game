@@ -1,4 +1,5 @@
 package umbrellatoolkit.level;
+import umbrellatoolkit.helpers.Point;
 import kha.math.Vector2;
 import umbrellatoolkit.Scene;
 import haxe.Json;
@@ -7,7 +8,7 @@ import umbrellatoolkit.GameObject;
 import umbrellatoolkit.level.Tile;
 import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.Layer;
-import umbrellatoolkit.level.Collision;
+import umbrellatoolkit.collision.Solid;
 import umbrellatoolkit.level.AssetsManagment;
 
 @:expose
@@ -44,7 +45,7 @@ class TileMap{
 
 									var tile:Tile = new Tile();
 									tile.squareColor = Color.Yellow ;//Color.fromString(layerD.legend[Std.parseInt(row)].substring(0,7));
-									tile.squareSize = new Vector2(layer.gridCellWidth, layer.gridCellHeight);
+									tile.squareSize = new Point(layer.gridCellWidth, layer.gridCellHeight);
 									tile.Position = new Vector2(layer.gridCellWidth*x, layer.gridCellHeight*y);
 
 									this.addCollisionLayer(row, tile.squareSize, tile.Position);
@@ -65,7 +66,14 @@ class TileMap{
 			// entities
 			else if(layer.entities != null){
 				for(entity in layer.entities){
-					this._Assets.addEntityOnSene(entity.name, this._Scene, new Vector2(entity.x, entity.y));
+					trace(entity.values);
+					this._Assets.addEntityOnSene(
+						entity.name,
+						this._Scene,
+						new Vector2(entity.x, entity.y),
+						entity.height > 0 ? new Point(entity.width, entity.height) : null,
+						entity.values 
+						);
 				}
 			}// End entities
 
@@ -75,22 +83,22 @@ class TileMap{
 		this._Scene.BackgroundColor = Color.fromString(this._TileSet.Data.backgroundColor.substring(0,7));
 	}
 
-	public function addCollisionLayer(tag:String, size:Vector2, position:Vector2){
+	public function addCollisionLayer(tag:String, size:Point, position:Vector2){
 		var _find:Bool = false;
 		var i = 0;
-		while(i < this._Scene.CollisionLayer.length){
-			if(this._Scene.CollisionLayer[i].tag == tag){
+		while(i < this._Scene.AllSolids.length){
+			if(this._Scene.AllSolids[i].tag == tag){
 				_find = true;
-				this._Scene.CollisionLayer[i].add(size, position);
+				this._Scene.AllSolids[i].add(size, position);
 			}
 			i++;
 		}
 
 		if(!_find){
-			var _collision:Collision = new Collision();
+			var _collision:Solid = new Solid();
 			_collision.tag = tag;
 			_collision.add(size, position);
-			this._Scene.CollisionLayer.push(_collision);
+			this._Scene.AllSolids.push(_collision);
 		}
 	}
 }
@@ -124,4 +132,7 @@ typedef LevelLayerEntities = {
 	var y:Int;
 	var originX:Int;
 	var originY:Int;
+	var height:Int;
+	var width:Int;
+	var values:Dynamic;
 }

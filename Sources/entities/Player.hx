@@ -1,26 +1,30 @@
 package entities;
 
-import umbrellatoolkit.level.Collision;
 import kha.Color;
 import kha.input.*;
 import kha.math.Vector2;
 import kha.graphics2.Graphics;
 import umbrellatoolkit.GameObject;
+import umbrellatoolkit.collision.Actor;
+import umbrellatoolkit.collision.Solid;
 
 @:expose
-class Player extends GameObject{
+class Player extends Actor{
 
 	public override function start() {
+		this.scene.AllActors.push(this);
 		Keyboard.get().notify(OnkeyDown, OnKeyUp);
 	}
 
 	public override function update(DeltaTime:Float) {
+		if(this.scene.camera != null && this.scene.camera.follow == null)
+			this.scene.camera.follow = this;
 		super.update(DeltaTime);
 	}
 
 	public override function updateData(DeltaTime:Float){
-		this.gravity(DeltaTime);
 		this.move(DeltaTime);
+		super.updateData(DeltaTime);
 	}
 
 	public override function render(g2:Graphics) {
@@ -34,55 +38,30 @@ class Player extends GameObject{
 	public var speed:Float = 150;
 
 	public function move(DeltaTime:Float) : Void{
-		var _position:Vector2;
-		if(this.Left){
-			var _position:Vector2 = new Vector2(this.Position.x - DeltaTime*this.speed, this.Position.y);
-			if(!this.getCollisionLayer("1").check(this.size, _position))
-				this.Position = _position;
-		}
-		if(this.Right){
-			var _position:Vector2 = new Vector2(this.Position.x + DeltaTime*this.speed, this.Position.y);
-			if(!this.getCollisionLayer("1").check(this.size, _position))
-				this.Position = _position;
-		}
+		if(this.cLeft)
+			this.moveX(-(DeltaTime*this.speed), null);
+		if(this.cRight)
+			this.moveX((DeltaTime*this.speed), null);
 	}
 	// end move
 
 
-	// physics
-	public var velocity:Vector2 = new Vector2(0, -210);
-	public var size:Vector2 = new Vector2(32,32);
-	public function gravity(DeltaTime:Float){
-		var _position:Vector2 = new Vector2(this.Position.x - this.velocity.x, this.Position.y - (this.velocity.y* DeltaTime));
-		if(!this.getCollisionLayer("1").check(this.size, _position))
-			this.Position = _position;
-	}
-
-	public function getCollisionLayer(tag:String):Collision{
-		for(layer in this.scene.CollisionLayer){
-			if(layer.tag == tag)
-				return layer;
-		}
-		return null;
-	}
-	// end physics
-
 	// Controllers
-	public var Right:Bool = false;
-	public var Left:Bool = false;
-	public var Up:Bool = false;
-	public var Down:Bool = false;
+	public var cRight:Bool = false;
+	public var cLeft:Bool = false;
+	public var cUp:Bool = false;
+	public var cDown:Bool = false;
 	
 	private function OnkeyDown(key:kha.input.KeyCode):Void{
 		switch (key){
 			case Up:
-				this.Up = true;
+				this.cUp = true;
 			case Down:
-				this.Down = true;
+				this.cDown = true;
 			case Left:
-				this.Left = true;
+				this.cLeft = true;
 			case Right:
-				this.Right = true;
+				this.cRight = true;
 			default:
 				//none
 		}
@@ -91,13 +70,13 @@ class Player extends GameObject{
 	private function OnKeyUp(key:kha.input.KeyCode):Void{
 		switch (key){
 			case Up:
-				this.Up = false;
+				this.cUp = false;
 			case Down:
-				this.Down = false;
+				this.cDown = false;
 			case Left:
-				this.Left = false;
+				this.cLeft = false;
 			case Right:
-				this.Right = false;
+				this.cRight = false;
 			default:
 				//none
 		}

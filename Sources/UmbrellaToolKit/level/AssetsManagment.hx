@@ -1,5 +1,6 @@
 package umbrellatoolkit.level;
 
+import umbrellatoolkit.helpers.Point;
 import kha.math.Vector2;
 import umbrellatoolkit.GameObject;
 import umbrellatoolkit.Scene;
@@ -19,16 +20,23 @@ class AssetsManagment
 		this._GameObjectsList.set(tag, asset);
 	}
 
-	public function addEntityOnSene(tag:String, scene:Scene, position:Vector2):Void{
+	public function addEntityOnSene(tag:String, scene:Scene, position:Vector2, ?size:Point, ?values:Dynamic):Void{
 		if(this._GameObjectsList.exists(tag)){
 			var asset:AssetObject = this._GameObjectsList[tag];
 			var gameObject:GameObject = Type.createInstance(asset.gameObject, []);
 			gameObject.Position = position;
+			if(size != null) gameObject.size = size;
+			if(values != null) gameObject.valeus = values;
 
 			switch (asset.layer){
 				case PLAYER:
-					scene.Player.push(gameObject);
 					gameObject.scene = scene;
+					gameObject.start();
+					scene.Player.push(gameObject);
+				case MIDDLEGROUND:
+					gameObject.scene = scene;
+					gameObject.start();
+					scene.MiddleGround.push(gameObject);
 				default:
 					trace("not found");
 			}

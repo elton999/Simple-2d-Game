@@ -1,5 +1,6 @@
 package;
 import entities.Player;
+import entities.solids.MovePlatform;
 import umbrellatoolkit.Scene;
 import umbrellatoolkit.level.AssetsManagment;
 import umbrellatoolkit.helpers.Timer;
@@ -18,6 +19,7 @@ class GameManagment {
 
 		// Set Assets
 		this.AssetsManagment.add(Player, "Player", LayersScene.PLAYER);
+		this.AssetsManagment.add(MovePlatform, "Plataforma", LayersScene.MIDDLEGROUND);
 	}
 
 	private var LoadScene:Bool = false;

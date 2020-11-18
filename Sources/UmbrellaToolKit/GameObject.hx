@@ -1,5 +1,6 @@
 package umbrellatoolkit;
 
+import umbrellatoolkit.helpers.Point;
 import umbrellatoolkit.helpers.BoxSprite;
 import umbrellatoolkit.Scene;
 import kha.math.Vector2;
@@ -12,7 +13,7 @@ import kha.System;
 @:expose
 class GameObject {
 	public function new (){
-		this.start();
+		//this.start();
 	}
 
 	public var Sprite:Image;
@@ -21,6 +22,9 @@ class GameObject {
 	public var BoxSprite:BoxSprite;
 	public var scene:Scene;
 	public var show:Bool = false;
+	public var size:Point = new Point(32,32);
+
+	public var valeus:Dynamic;
 
 	public function start() : Void{}
 	public function update(DeltaTime:Float) : Void{}

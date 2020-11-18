@@ -1,4 +1,5 @@
 package umbrellatoolkit.level;
+import umbrellatoolkit.helpers.Point;
 import kha.graphics2.Graphics;
 import kha.Color;
 import kha.math.Vector2;
@@ -7,7 +8,7 @@ import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.TileMap;
 
 class Tile extends GameObject{
-	public var squareSize:Vector2;
+	public var squareSize:Point;
 	public var squareColor:Color;
 
 	public override function render(g2:Graphics) {

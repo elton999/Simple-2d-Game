@@ -5,7 +5,8 @@ import umbrellatoolkit.Camera;
 import umbrellatoolkit.helpers.Point;
 import umbrellatoolkit.level.TileSet;
 import umbrellatoolkit.level.TileMap;
-import umbrellatoolkit.level.Collision;
+import umbrellatoolkit.collision.Actor;
+import umbrellatoolkit.collision.Solid;
 import umbrellatoolkit.level.AssetsManagment;
 import kha.Scaler;
 import kha.Image;
@@ -42,7 +43,8 @@ class Scene {
 	public var _BackBuffer:Image;
 
 	public var SceneReady:Bool = false;
-	public var CollisionLayer:Array<Collision> = new Array<Collision>();
+	public var AllSolids:Array<Solid> = new Array<Solid>();
+	public var AllActors:Array<Actor> = new Array<Actor>();
 
 	public var scene:umbrellatoolkit.Scene;
 	public var camera:Camera;
@@ -74,7 +76,7 @@ class Scene {
 				this.SceneReady = true;
 				this.camera = new Camera();
 				this.camera.scene = this;
-				if(this.Player.length > 0) this.camera.follow = this.Player[0];
+				//if(this.Player.length > 0) this.camera.follow = this.Player[0];
 				
 			});
 		});
