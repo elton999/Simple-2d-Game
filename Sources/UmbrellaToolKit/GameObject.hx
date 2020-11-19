@@ -26,6 +26,8 @@ class GameObject {
 
 	public var valeus:Dynamic;
 
+	public var Destroy:Bool = false;
+
 	public function start() : Void{}
 	public function update(DeltaTime:Float) : Void{}
 	public function updateData(DeltaTime:Float) : Void{}

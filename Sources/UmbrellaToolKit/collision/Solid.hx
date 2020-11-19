@@ -130,29 +130,31 @@ class Solid extends GameObject {
 
 	public function overlapCheck(actor:Actor):Bool{
 
-		var i:Int = 0;
-		while(i < this.positions.length){
-			var x_overlaps:Bool = false;
-			var y_overlaps:Bool = false;
+		if(this.Collidable){
+			var i:Int = 0;
+			while(i < this.positions.length){
+				var x_overlaps:Bool = false;
+				var y_overlaps:Bool = false;
 
-			var x_width:Int = Std.int(this.positions[i].x + this.sizes[i].x);
-			var y_height:Int = Std.int(this.positions[i].y + this.sizes[i].y);
-			
-			x_overlaps = (
-				(actor.Position.x + actor.size.x > this.positions[i].x && actor.Position.x + actor.size.x < x_width) ||
-				(actor.Position.x > this.positions[i].x && actor.Position.x < x_width) ||
-				(actor.Position.x <= this.positions[i].x && actor.Position.x + actor.size.x >= x_width)
-			);
+				var x_width:Int = Std.int(this.positions[i].x + this.sizes[i].x);
+				var y_height:Int = Std.int(this.positions[i].y + this.sizes[i].y);
+				
+				x_overlaps = (
+					(actor.Position.x + actor.size.x > this.positions[i].x && actor.Position.x + actor.size.x < x_width) ||
+					(actor.Position.x > this.positions[i].x && actor.Position.x < x_width) ||
+					(actor.Position.x <= this.positions[i].x && actor.Position.x + actor.size.x >= x_width)
+				);
 
-			y_overlaps = (
-				(actor.Position.y + actor.size.y > this.positions[i].y && actor.Position.y + actor.size.y <= y_height) ||
-				(actor.Position.y > this.positions[i].y && actor.Position.y < y_height) ||
-				(actor.Position.y <= this.positions[i].y && actor.Position.y + actor.size.y >= y_height)
-			);	
+				y_overlaps = (
+					(actor.Position.y + actor.size.y > this.positions[i].y && actor.Position.y + actor.size.y <= y_height) ||
+					(actor.Position.y > this.positions[i].y && actor.Position.y < y_height) ||
+					(actor.Position.y <= this.positions[i].y && actor.Position.y + actor.size.y >= y_height)
+				);	
 
-			i++;
-			if(x_overlaps && y_overlaps)
-				return true;
+				i++;
+				if(x_overlaps && y_overlaps)
+					return true;
+			}
 		}
 
 		return false;

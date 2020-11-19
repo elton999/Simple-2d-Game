@@ -90,6 +90,7 @@ class Scene {
 
 	public function update(deltaTime:Float) : Void{
 		if(this.SceneReady){
+			this.DestroyGameObjects();
 			if(this.camera != null) this.camera.update();
 			for(gameObject in this.Background) gameObject.update(deltaTime);
 			for(gameObject in this.MiddleGround) gameObject.update(deltaTime);
@@ -133,5 +134,44 @@ class Scene {
 		framebuffer.g2.begin();
 			Scaler.scale(this._BackBuffer, framebuffer, System.screenRotation);
 		framebuffer.g2.end();
+	}
+
+
+	private function DestroyGameObjects():Void{
+		var newArray:Array<GameObject> = new Array<GameObject>();
+		for(gameObject in this.Background)
+			if(!gameObject.Destroy)
+				newArray.push(gameObject);
+		this.Background = newArray;
+		newArray = new Array<GameObject>();
+
+		for(gameObject in this.MiddleGround)
+			if(!gameObject.Destroy)
+				newArray.push(gameObject);
+		this.MiddleGround = newArray;
+		newArray= new Array<GameObject>();
+
+		for(gameObject in this.Enemies)
+			if(!gameObject.Destroy)
+				newArray.push(gameObject);
+		this.Enemies = newArray;
+		newArray = new Array<GameObject>();
+
+		for(gameObject in this.Player)
+			if(!gameObject.Destroy)
+				newArray.push(gameObject);
+		this.Player = newArray;
+		newArray = new Array<GameObject>();
+
+		for(gameObject in this.Forenground)
+			if(!gameObject.Destroy)
+				newArray.push(gameObject);
+		this.Forenground = newArray;
+		newArray = new Array<GameObject>();
+
+		for(gameObject in this.UI)
+			if(!gameObject.Destroy)
+				newArray.push(gameObject);
+		this.UI = newArray;
 	}
 }
