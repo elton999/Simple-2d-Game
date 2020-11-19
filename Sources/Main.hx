@@ -13,7 +13,7 @@ class Main {
 	public static function main() {
 		var scale:Float = 2.0;
 		var WindowSettins = new WindowOptions();
-		WindowSettins.mode = Fullscreen;
+		WindowSettins.mode = Windowed;
 		System.start({title: "Simple 2d", width: Std.int(1920 / scale), height: Std.int(1080 / scale), window: WindowSettins}, function (_) {
 			Scheduler.addTimeTask(function () { Game.update(); }, 0, 1 / 60);
 			Scheduler.addTimeTask(function () { Game.updateData(); }, 0, 1 / 30);

@@ -18,6 +18,14 @@ class Actor extends GameObject{
 		return Std.int(this.Position.x);
 	}
 
+	public function Top():Int{
+		return Std.int(this.Position.y);
+	}
+
+	public function Bottom():Int{
+		return Std.int(this.Position.y + this.size.y);
+	}
+
 	public var velocity:Vector2 = new Vector2(0, -350);
 	public function gravity(DeltaTime:Float){
 		if(this.velocity.x != 0)

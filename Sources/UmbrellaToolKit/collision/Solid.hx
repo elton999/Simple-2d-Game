@@ -28,6 +28,14 @@ class Solid extends GameObject {
 		return Std.int(this.positions[0].x);
 	}
 
+	public function Top():Int{
+		return Std.int(this.positions[0].y);
+	}
+
+	public function Bottom():Int{
+		return Std.int(this.positions[0].y + this.sizes[0].y);
+	}
+
 	
 	public function move(x:Float, y:Float):Void{
 		xRemainder += x; 
@@ -56,7 +64,7 @@ class Solid extends GameObject {
 					i = 0;
 					while(i < this.scene.AllActors.length){
 						if (overlapCheck(this.scene.AllActors[i])){
-							// Push Right
+							// Push top
 							this.scene.AllActors[i].moveX(this.Right() - this.scene.AllActors[i].Left(), this.scene.AllActors[i].squish);
 						} else if(riding.indexOf(this.scene.AllActors[i]) != -1) {
 							// Carry right
@@ -70,7 +78,7 @@ class Solid extends GameObject {
 					while(i < this.scene.AllActors.length){
 						if (overlapCheck(this.scene.AllActors[i])){
 							// Push left
-							this.scene.AllActors[i].moveX(this.Left() - this.scene.AllActors[i].Left(), this.scene.AllActors[i].squish);
+							this.scene.AllActors[i].moveX(this.Left() - this.scene.AllActors[i].Right(), this.scene.AllActors[i].squish);
 						} else if(riding.indexOf(this.scene.AllActors[i]) != -1) {
 							// Carry left
 							this.scene.AllActors[i].moveX(moveX, null);
@@ -94,7 +102,7 @@ class Solid extends GameObject {
 					i = 0;
 					while(i < this.scene.AllActors.length){
 						if (overlapCheck(this.scene.AllActors[i])){
-							this.scene.AllActors[i].moveY(moveY, this.scene.AllActors[i].squish);
+							this.scene.AllActors[i].moveY(this.Bottom() - this.scene.AllActors[i].Top(), this.scene.AllActors[i].squish);
 						} else if(riding.indexOf(this.scene.AllActors[i]) != -1) {
 							this.scene.AllActors[i].moveY(moveY, null);
 						}
@@ -103,9 +111,10 @@ class Solid extends GameObject {
 					}
 					
 				} else {
+					i = 0;
 					while(i < this.scene.AllActors.length){
 						if (overlapCheck(this.scene.AllActors[i])){
-							this.scene.AllActors[i].moveY(moveY, this.scene.AllActors[i].squish);
+							this.scene.AllActors[i].moveY(this.Top() - this.scene.AllActors[i].Bottom(), this.scene.AllActors[i].squish);
 						} else if(riding.indexOf(this.scene.AllActors[i]) != -1) {
 							this.scene.AllActors[i].moveY(moveY, null);
 						}

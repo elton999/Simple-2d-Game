@@ -66,7 +66,6 @@ class TileMap{
 			// entities
 			else if(layer.entities != null){
 				for(entity in layer.entities){
-					trace(entity.values);
 					this._Assets.addEntityOnSene(
 						entity.name,
 						this._Scene,

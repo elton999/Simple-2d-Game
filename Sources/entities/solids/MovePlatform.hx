@@ -29,9 +29,9 @@ class MovePlatform extends Solid{
 				this.back = false;
 
 			if(!this.back)
-				this.move(1,0);
+				this.move(0,-1);
 			else
-				this.move(-1,0);
+				this.move(0,1);
 		}
 	}
 
